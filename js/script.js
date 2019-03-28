@@ -1,9 +1,32 @@
-//SEARCH BLOCK
+//DROP_MENU + SEARCH BLOCK
 
+var burgerBtn = document.querySelector('.btn-burger');
+var mainMenu = document.querySelector('.main-nav');
 var searchBox = document.querySelector('.form-box');
 var searchBtn = document.querySelector('.main-nav__link--search');
 
+burgerBtn.addEventListener('click', function() {
+    if (searchBox.classList.contains('form-box--active')) {
+        searchBox.classList.remove('form-box--active');
+    }
+    burgerBtn.classList.toggle('btn-burger--active');
+    mainMenu.classList.toggle('main-nav--drop');
+    //console.dir(mainMenu);
+});
+
+
+
+
+
+
 searchBtn.addEventListener('click', function() {
+    
+    if(mainMenu.classList.contains('main-nav--drop')) {
+        mainMenu.classList.remove('main-nav--drop');
+        burgerBtn.classList.remove('btn-burger--active');
+    }
+
+    
 
     searchBox.classList.toggle('form-box--active');
 });
@@ -110,3 +133,19 @@ function changeSlide (slide) {
     
 }
 
+
+///////////СКРИПТ ПРОКРУТКИ ВВЕРХ СТРАНИЦЫ
+
+var t;
+function up() {
+  var top = Math.max(document.body.scrollTop,document.documentElement.scrollTop);
+  if(top > 0) {
+    window.scrollBy(0,-70);
+    t = setTimeout('up()',20);
+  } else clearTimeout(t);
+  return false;
+}
+
+var toTopBtn = document.querySelector('.btn-to-top');
+
+toTopBtn.addEventListener('click', up);
